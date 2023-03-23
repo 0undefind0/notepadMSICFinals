@@ -34,9 +34,9 @@ public class Main extends JFrame {
                     process = Runtime.getRuntime().exec("notepad.exe");
 
                     // Create file if file doesn't exists
-//                    String desktopPath = System.getProperty("user.home") + "/Desktop";  // Uncomment and use this; this is for you .3.
-//                    File file = new File(desktopPath + "/output.txt");  // Uncomment and use this; this is for you .3.
-                    File file = new File("D:\\JavaProjects" + "/output.txt"); // Delete this; it will not run for you
+                    String desktopPath = System.getProperty("user.home") + "/Desktop";  // Uncomment and use this; this is for you .3.
+                    File file = new File(desktopPath + "/output.txt");  // Uncomment and use this; this is for you .3.
+//                    File file = new File("D:\\JavaProjects" + "/output.txt"); // Delete this; it will not run for you
 
                     // Save the opened process in a file
                     ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "tasklist /FI \"IMAGENAME eq notepad.exe\"");
