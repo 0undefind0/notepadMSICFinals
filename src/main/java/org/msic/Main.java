@@ -33,15 +33,7 @@ public class Main extends JFrame {
                     Process process;
                     process = Runtime.getRuntime().exec("notepad.exe");
 
-                    // Create file if file doesn't exists
-                    String desktopPath = System.getProperty("user.home") + "/Desktop";  // Uncomment and use this; this is for you .3.
-                    File file = new File(desktopPath + "/output.txt");  // Uncomment and use this; this is for you .3.
-//                    File file = new File("D:\\JavaProjects" + "/output.txt"); // Delete this; it will not run for you
-
-                    // Save the opened process in a file
-                    ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "tasklist /FI \"IMAGENAME eq notepad.exe\"");
-                    builder.redirectOutput(file);
-                    builder.start();
+                    saveCurrentProcesses();
 
                     processes.add(process);
 
@@ -63,6 +55,8 @@ public class Main extends JFrame {
                 Process poppedProcess = processes.remove(0);
                 poppedProcess.destroy();
 
+                saveCurrentProcesses();
+
                 JOptionPane.showMessageDialog(Main.this, "Process "+ poppedProcess.pid() +" terminated");
             }
         });
@@ -72,6 +66,23 @@ public class Main extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
+    private void saveCurrentProcesses() {
+        try {
+// OI!! over here! read the instructions below!
+            // Create file if file doesn't exists
+            String desktopPath = System.getProperty("user.home") + "/Desktop";  // OI!! Uncomment and use this; this is for you .3.
+            File file = new File(desktopPath + "/output.txt");  // OI!! Uncomment and use this; this is for you .3.
+//            File file = new File("D:\\JavaProjects" + "/output.txt"); // Delete this; it will not run for you
+
+            // Save the opened process in a file
+            ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", "tasklist /FI \"IMAGENAME eq notepad.exe\"");
+            builder.redirectOutput(file);
+            builder.start();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void main(String[] args) {
